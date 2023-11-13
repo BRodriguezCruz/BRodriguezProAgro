@@ -1,0 +1,65 @@
+﻿@model BL.Usuario
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center" style="font-family: 'Times New Roman'">RELLENA LOS CAMPOS</h1>
+<br />
+<hr />
+
+
+@using (Html.BeginForm("Form","Usuario", FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+    @Html.HiddenFor(model => model.IdUsuario)
+
+    @if (Model.IdUsuario != 0)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.IdUsuario,new {@class= "form-control", @disabled="disabled"})
+            </div>
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Nombre,new {@class= "form-control", @required = "required", @placeholder = "NOMBRE"})
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6"->
+                @Html.TextBoxFor(model => model.FechaNacimiento,"{0:MM-dd-yyyy}", new { @class = "form-control", type = "date", @placeholder = "AGREGA FECHA"})
+            </div>
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.RFC,new {@class= "form-control", @required = "required"})
+            </div>
+        </div>
+        <br />
+        <hr />
+        <button class="btn btn-success" type="submit">ACTUALIZAR USUARIO </button>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Nombre,new {@class= "form-control", @required = "required", @placeholder = "NOMBRE"})
+            </div>
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.FechaNacimiento,"{0:MM-dd-yyyy}", new { @class = "form-control", type = "date", @placeholder = "AGREGA FECHA"})
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.RFC,new {@class= "form-control", @required = "required", @placeholder = "CAPITAL"})
+            </div>
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.Contraseña,new {@class= "form-control", @required = "required", @placeholder = "Contraseña"})
+            </div>
+        </div>
+        <br />
+        <hr />
+        <button class="btn btn-success" type="submit">AGREGAR USUARIO </button>
+        
+    }
+    <a class="btn btn-warning" href="@Url.Action("GetAll","Usuario")">VOLVER</a>
+}
+

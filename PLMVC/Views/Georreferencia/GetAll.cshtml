@@ -1,0 +1,50 @@
+﻿@model BL.Georreferencia
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center" style="font-family:'Times New Roman'">GEORREFERENCIAS ASIGANDAS</h1>
+<br />
+<hr />
+
+@if (Model.ListaGeorreferencias.Count != 0)
+{
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">EDITAR</th>
+                    <th class="text-center">ID GEORREFERENCIA</th>
+                    <th class="text-center">LATITUD</th>
+                    <th class="text-center">LONGITUD</th>
+                    <th class="text-center">NUMERO DE ESTADO</th>
+                    <th class="text-center">ELIMINAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (BL.Georreferencia registro in Model.ListaGeorreferencias)
+                {
+                    <tr>
+                        <td class="text-center"></td>
+                        <td class="text-center">@registro.IdGeorreferencia</td>
+                        <td class="text-center">@registro.Latitud</td>
+                        <td class="text-center">@registro.Longitud</td>
+                        <td class="text-center">@registro.Estado.IdEstado</td>
+                        <td class="text-center"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        NO HAY GEORREFERENCIAS GUARDADAS AUN :(
+    </div>
+}
+<br />
+<a class="btn btn-outline-success" href="@Url.Action("Form","Georreferencia")">AGREGAR NUEVA GEORRFERENCIA</a>
+<a class="btn btn-outline-secondary" href="@Url.Action("CargaMasiva","CargaMasiva")">AGREGAR GEORREFERENCIAS DESDE EXCEL</a>
+
